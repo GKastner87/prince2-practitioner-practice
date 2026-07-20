@@ -17,7 +17,6 @@ After GitHub Pages is enabled for this repository, the site will be available at
 - Option-by-option explanations
 - References to relevant sections of the official PRINCE2 7 guidance
 - Browser-local progress saving
-- Printable candidate and answer-guide downloads
 
 ## Run locally
 
@@ -27,12 +26,9 @@ After GitHub Pages is enabled for this repository, the site will be available at
 
 No server, database, sign-in, or internet connection is required after the files are downloaded. Progress is stored in the browser's local storage.
 
-## Downloads
+## Offline copy
 
-- [Candidate pack — PDF](downloads/PRINCE2-7-Practitioner-Candidate-Pack.pdf)
-- [Candidate pack — Word](downloads/PRINCE2-7-Practitioner-Candidate-Pack.docx)
-- [Enhanced answer guide — PDF](downloads/PRINCE2-7-Practitioner-Enhanced-Answer-Guide.pdf)
-- [Enhanced answer guide — Word](downloads/PRINCE2-7-Practitioner-Enhanced-Answer-Guide.docx)
+Use **Code → Download ZIP** in GitHub, extract the repository, and open `index.html`. The application is self-contained.
 
 ## GitHub Pages deployment
 
@@ -59,7 +55,6 @@ See [docs/DISCLAIMER.md](docs/DISCLAIMER.md).
 ```text
 .
 ├── index.html
-├── downloads/
 ├── docs/
 └── .github/workflows/deploy-pages.yml
 ```
