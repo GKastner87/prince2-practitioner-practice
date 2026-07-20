@@ -1,7 +1,12 @@
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "publication_status": "staging",
   "site_integration": false,
+  "import_policy": {
+    "ignore_source_result_field": true,
+    "derive_answer_from_explanation": true,
+    "retain_all_source_items_for_review": true
+  },
   "batches": [
     {
       "batch_id": "foundation-incoming-001",
@@ -9,9 +14,9 @@
       "source_claimed_count": 25,
       "records_found": 24,
       "missing_source_numbers": [25],
+      "incoming_review_count": 24,
       "approved_count": 0,
-      "rewrite_count": 17,
-      "reject_count": 7,
+      "published_count": 0,
       "status": "incoming_review"
     }
   ]
