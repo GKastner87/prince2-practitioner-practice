@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "publication_status": "staging",
+  "site_integration": false,
+  "batches": [
+    {
+      "batch_id": "foundation-incoming-001",
+      "path": "batches/batch-001-review.json",
+      "source_claimed_count": 25,
+      "records_found": 24,
+      "missing_source_numbers": [25],
+      "approved_count": 0,
+      "rewrite_count": 17,
+      "reject_count": 7,
+      "status": "incoming_review"
+    }
+  ]
+}
