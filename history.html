@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#17324d">
+  <meta name="description" content="Saved PRINCE2 practice exam attempts, score trends and weak-topic analysis.">
+  <title>Attempt History — PRINCE2 7 Practitioner Practice</title>
+  <link rel="stylesheet" href="assets/styles.css?v=20260720-3">
+  <link rel="stylesheet" href="assets/enhancements.css?v=20260720-3">
+</head>
+<body>
+<header class="site-header">
+  <div class="brand">
+    <h1>Attempt history and improvement patterns</h1>
+    <p>Scores, weak topics and repeatedly missed questions</p>
+  </div>
+  <div class="toolbar history-actions">
+    <a class="header-link" href="index.html">Practice exams</a>
+    <a class="header-link" href="references.html">References</a>
+    <button id="exportJsonBtn" type="button">Export JSON</button>
+    <button id="exportCsvBtn" type="button">Export CSV</button>
+    <label class="button-link">Import JSON<input id="importInput" class="hidden" type="file" accept="application/json,.json"></label>
+    <button id="clearHistoryBtn" type="button">Clear history</button>
+  </div>
+</header>
+
+<main id="historyContent" class="reference-page" aria-live="polite"></main>
+
+<footer>
+  <p>History is stored only in this browser. Export and import the JSON file to move history between desktop, iPad or mobile browsers.</p>
+  <p>PRINCE2® is a registered trademark of PeopleCert. This independent project is not affiliated with or endorsed by PeopleCert.</p>
+</footer>
+<script src="assets/history.js?v=20260720-3"></script>
+</body>
+</html>
