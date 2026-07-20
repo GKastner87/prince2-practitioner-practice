@@ -25,7 +25,10 @@ jobs:
           node --check assets/app.js
           node --check assets/reference-links.js
           node --check assets/enhancements.js
+          node --check assets/enhancements-ready.js
+          node --check assets/study-session-display.js
           node --check assets/history.js
+          node --check assets/history-corrections.js
 
       - name: Validate exam questions and references
         run: node tools/validate-exam-data.mjs
@@ -38,3 +41,4 @@ jobs:
           test -f assets/enhancements.css
           grep -q 'assets/enhancements.js' index.html
           grep -q 'history.html' index.html
+          grep -q 'history-corrections.js' history.html
