@@ -20,5 +20,21 @@ jobs:
         with:
           node-version: '22'
 
+      - name: Validate JavaScript syntax
+        run: |
+          node --check assets/app.js
+          node --check assets/reference-links.js
+          node --check assets/enhancements.js
+          node --check assets/history.js
+
       - name: Validate exam questions and references
         run: node tools/validate-exam-data.mjs
+
+      - name: Confirm required pages and assets
+        run: |
+          test -f index.html
+          test -f history.html
+          test -f references.html
+          test -f assets/enhancements.css
+          grep -q 'assets/enhancements.js' index.html
+          grep -q 'history.html' index.html
