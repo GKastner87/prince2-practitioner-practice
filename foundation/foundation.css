@@ -1,0 +1,95 @@
+.foundation-shell {
+  max-width: 1380px;
+  margin: 0 auto;
+  padding: 18px max(18px, env(safe-area-inset-right)) 30px max(18px, env(safe-area-inset-left));
+}
+.topic-intro {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+}
+.topic-intro h2 { margin: 2px 0 8px; color: var(--navy); }
+.topic-intro p { max-width: 850px; }
+.eyebrow {
+  margin: 0;
+  color: var(--blue);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .05em;
+  text-transform: uppercase;
+}
+.topic-actions { display: flex; gap: 9px; flex-wrap: wrap; }
+.process-map h2 { margin-top: 0; color: var(--navy); }
+.process-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.process-grid div {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  background: #f8fafc;
+}
+.process-grid strong {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  background: var(--navy);
+  color: white;
+}
+.foundation-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 18px;
+}
+.foundation-layout .nav-panel { top: 18px; }
+.answer-status {
+  display: inline-block;
+  margin-bottom: 10px;
+  padding: 5px 9px;
+  border-radius: 999px;
+  font-size: .82rem;
+  font-weight: 700;
+}
+.answer-status.correct { background: var(--ok); }
+.answer-status.incorrect { background: var(--bad); }
+.answerbox .answer-heading { margin: 0 0 8px; }
+.answerbox .selected-answer { color: var(--muted); }
+.reference-links.compact { margin-top: 10px; }
+.reference-links.compact a { background: var(--surface); }
+.wording-note {
+  padding: 10px 12px;
+  border-left: 4px solid #9b6b00;
+  border-radius: 6px;
+  background: var(--warn);
+}
+.source-tag {
+  display: inline-block;
+  margin-left: 6px;
+  color: var(--muted);
+  font-size: .78rem;
+}
+.option.result-correct { border-color: #4d8b57; background: var(--ok); }
+.option.result-incorrect { border-color: #a64b43; background: var(--bad); }
+
+@media (max-width: 900px) {
+  .topic-intro { align-items: flex-start; flex-direction: column; }
+  .foundation-layout { grid-template-columns: 1fr; }
+  .foundation-layout .nav-panel { position: static; }
+  .process-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  .foundation-shell { padding: 10px max(10px, env(safe-area-inset-right)) calc(88px + env(safe-area-inset-bottom)) max(10px, env(safe-area-inset-left)); }
+  .process-grid { grid-template-columns: 1fr; }
+  .topic-actions { width: 100%; }
+  .topic-actions button { flex: 1 1 140px; }
+}
