@@ -29,14 +29,26 @@ jobs:
           node --check assets/study-session-display.js
           node --check assets/history.js
           node --check assets/history-corrections.js
-          node --check foundation/stage-boundary-data.js
+          node --check foundation/data/hard-foundation-01.js
+          node --check foundation/data/hard-foundation-02.js
+          node --check foundation/data/hard-foundation-03a.js
+          node --check foundation/data/hard-foundation-03b.js
+          node --check foundation/data/hard-foundation-03c.js
+          node --check foundation/data/hard-foundation-03d.js
+          node --check foundation/data/hard-foundation-03e.js
+          node --check foundation/data/hard-foundation-04a.js
+          node --check foundation/data/hard-foundation-04b.js
+          node --check foundation/data/hard-foundation-04c.js
+          node --check foundation/data/hard-foundation-04d.js
+          node --check foundation/data/hard-foundation-04e.js
+          node --check foundation/data/hard-foundation-04f.js
           node --check foundation/foundation.js
 
       - name: Validate Practitioner questions and references
         run: node tools/validate-exam-data.mjs
 
-      - name: Validate Foundation questions and references
-        run: node tools/validate-foundation-stage-boundary.mjs
+      - name: Validate complete Foundation library
+        run: node tools/validate-foundation-library.mjs
 
       - name: Confirm required pages and assets
         run: |
@@ -46,7 +58,19 @@ jobs:
           test -f foundation/index.html
           test -f foundation/foundation.css
           test -f foundation/foundation.js
-          test -f foundation/stage-boundary-data.js
+          test -f foundation/data/hard-foundation-01.js
+          test -f foundation/data/hard-foundation-02.js
+          test -f foundation/data/hard-foundation-03a.js
+          test -f foundation/data/hard-foundation-03b.js
+          test -f foundation/data/hard-foundation-03c.js
+          test -f foundation/data/hard-foundation-03d.js
+          test -f foundation/data/hard-foundation-03e.js
+          test -f foundation/data/hard-foundation-04a.js
+          test -f foundation/data/hard-foundation-04b.js
+          test -f foundation/data/hard-foundation-04c.js
+          test -f foundation/data/hard-foundation-04d.js
+          test -f foundation/data/hard-foundation-04e.js
+          test -f foundation/data/hard-foundation-04f.js
           test -f assets/enhancements.css
           grep -q 'assets/enhancements.js' index.html
           grep -q 'history.html' index.html
