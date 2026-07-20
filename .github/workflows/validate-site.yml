@@ -29,16 +29,26 @@ jobs:
           node --check assets/study-session-display.js
           node --check assets/history.js
           node --check assets/history-corrections.js
+          node --check foundation/stage-boundary-data.js
+          node --check foundation/foundation.js
 
-      - name: Validate exam questions and references
+      - name: Validate Practitioner questions and references
         run: node tools/validate-exam-data.mjs
+
+      - name: Validate Foundation questions and references
+        run: node tools/validate-foundation-stage-boundary.mjs
 
       - name: Confirm required pages and assets
         run: |
           test -f index.html
           test -f history.html
           test -f references.html
+          test -f foundation/index.html
+          test -f foundation/foundation.css
+          test -f foundation/foundation.js
+          test -f foundation/stage-boundary-data.js
           test -f assets/enhancements.css
           grep -q 'assets/enhancements.js' index.html
           grep -q 'history.html' index.html
+          grep -q 'foundation/index.html' index.html
           grep -q 'history-corrections.js' history.html
