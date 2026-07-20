@@ -4,18 +4,19 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17324d">
-  <meta name="description" content="Two original PRINCE2 7 Practitioner-style practice exams with study mode, detailed rationales and timed exam mode.">
+  <meta name="description" content="Two original PRINCE2 7 Practitioner-style practice exams with study mode, detailed rationales, attempt history and timed exam mode.">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <title>PRINCE2 7 Practitioner Interactive Practice</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260720-2">
+  <link rel="stylesheet" href="assets/styles.css?v=20260720-3">
+  <link rel="stylesheet" href="assets/enhancements.css?v=20260720-3">
 </head>
 <body>
 <a class="skip-link" href="#questionCard">Skip to current question</a>
 <header class="site-header">
   <div class="brand">
     <h1>PRINCE2® 7 Practitioner Practice</h1>
-    <p>Original practice material · Study and timed modes</p>
+    <p>Original practice material · Detailed learning mode · Attempt history</p>
   </div>
   <div class="toolbar" aria-label="Exam controls">
     <label>Exam
@@ -31,6 +32,7 @@
       </select>
     </label>
     <output id="timer" class="timer" aria-live="polite">Study</output>
+    <a class="header-link" href="history.html">History</a>
     <a class="header-link" href="references.html">References</a>
     <button id="resetBtn" type="button">Reset</button>
   </div>
@@ -47,7 +49,7 @@
         <div class="progressbar" aria-hidden="true"><span id="progressFill"></span></div>
         <div id="progressText" class="notice" aria-live="polite"></div>
         <div id="navigator" class="navigator" aria-label="Questions"></div>
-        <p class="notice mode-help"><b>Study mode:</b> answer, then reveal the rationale, option analysis and references.<br><br><b>Timed mode:</b> answers remain hidden until submission. Progress is saved in this browser.</p>
+        <p class="notice mode-help"><b>Study mode:</b> answer, reveal the explanation, then save a study checkpoint when useful.<br><br><b>Timed mode:</b> answers remain hidden until submission. Submitted attempts are added to History automatically.</p>
       </div>
     </details>
   </aside>
@@ -63,6 +65,7 @@
         <button id="nextBtn" type="button">Next</button>
       </div>
       <div class="action-group">
+        <button id="saveStudyBtn" type="button">Save study session</button>
         <button id="checkBtn" class="primary" type="button">Check and reveal answer</button>
         <button id="submitBtn" class="danger hidden" type="button">Submit exam</button>
       </div>
@@ -74,25 +77,26 @@
 
 <footer>
   <p>Independent original practice material. Not affiliated with or endorsed by PeopleCert. PRINCE2® is a registered trademark of PeopleCert.</p>
-  <p><a href="references.html">Reference library</a> · <a href="https://github.com/GKastner87/prince2-practitioner-practice">GitHub repository</a> · <a href="docs/DISCLAIMER.md">Disclaimer</a></p>
+  <p><a href="history.html">Attempt history</a> · <a href="references.html">Reference library</a> · <a href="https://github.com/GKastner87/prince2-practitioner-practice">GitHub repository</a> · <a href="docs/DISCLAIMER.md">Disclaimer</a></p>
 </footer>
 
-<script src="config/reference-config.js?v=20260720-2"></script>
-<script src="data/chunks/a-01.js?v=20260720-2"></script>
-<script src="data/chunks/a-02.js?v=20260720-2"></script>
-<script src="data/chunks/a-03.js?v=20260720-2"></script>
-<script src="data/chunks/a-04.js?v=20260720-2"></script>
-<script src="data/chunks/a-05.js?v=20260720-2"></script>
-<script src="data/chunks/a-06.js?v=20260720-2"></script>
-<script src="data/chunks/b-01.js?v=20260720-2"></script>
-<script src="data/chunks/b-02.js?v=20260720-2"></script>
-<script src="data/chunks/b-03.js?v=20260720-2"></script>
-<script src="data/chunks/b-04.js?v=20260720-2"></script>
-<script src="data/chunks/b-05.js?v=20260720-2"></script>
-<script src="data/chunks/b-06.js?v=20260720-2"></script>
-<script src="data/exam-a.js?v=20260720-2"></script>
-<script src="data/exam-b.js?v=20260720-2"></script>
-<script src="assets/app.js?v=20260720-2"></script>
-<script src="assets/reference-links.js?v=20260720-2"></script>
+<script src="config/reference-config.js?v=20260720-3"></script>
+<script src="data/chunks/a-01.js?v=20260720-3"></script>
+<script src="data/chunks/a-02.js?v=20260720-3"></script>
+<script src="data/chunks/a-03.js?v=20260720-3"></script>
+<script src="data/chunks/a-04.js?v=20260720-3"></script>
+<script src="data/chunks/a-05.js?v=20260720-3"></script>
+<script src="data/chunks/a-06.js?v=20260720-3"></script>
+<script src="data/chunks/b-01.js?v=20260720-3"></script>
+<script src="data/chunks/b-02.js?v=20260720-3"></script>
+<script src="data/chunks/b-03.js?v=20260720-3"></script>
+<script src="data/chunks/b-04.js?v=20260720-3"></script>
+<script src="data/chunks/b-05.js?v=20260720-3"></script>
+<script src="data/chunks/b-06.js?v=20260720-3"></script>
+<script src="data/exam-a.js?v=20260720-3"></script>
+<script src="data/exam-b.js?v=20260720-3"></script>
+<script src="assets/app.js?v=20260720-3"></script>
+<script src="assets/reference-links.js?v=20260720-3"></script>
+<script src="assets/enhancements.js?v=20260720-3"></script>
 </body>
 </html>
