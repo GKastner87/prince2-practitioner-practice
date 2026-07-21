@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17324d">
-  <meta name="description" content="PRINCE2 Project Management Foundation Version 7 hard question library with answer reveal, concise topic filters and Markdown study notes.">
+  <meta name="description" content="PRINCE2 Project Management Foundation Version 7 hard question library with answer reveal, concise topic filters and formatted study notes stored as Markdown.">
   <title>PRINCE2 Foundation Study Library</title>
-  <link rel="stylesheet" href="../assets/styles.css?v=20260721-3">
-  <link rel="stylesheet" href="foundation.css?v=20260721-3">
+  <link rel="stylesheet" href="../assets/styles.css?v=20260721-4">
+  <link rel="stylesheet" href="foundation.css?v=20260721-4">
 </head>
 <body>
 <a class="skip-link" href="#questionCard">Skip to current question</a>
@@ -16,7 +16,7 @@
   <div class="brand">
     <p class="header-kicker">PRINCE2® 7</p>
     <h1>Foundation Study Library</h1>
-    <p>Hard practice questions · concise topics · Markdown notes</p>
+    <p>Hard practice questions · concise topics · formatted study notes</p>
   </div>
   <nav class="toolbar" aria-label="Site navigation">
     <a class="header-link" href="../index.html">Practitioner</a>
@@ -29,7 +29,7 @@
     <div class="hero-copy">
       <p class="eyebrow">Study dashboard</p>
       <h2>Work through the bank without losing your notes</h2>
-      <p>The supplied Correct/Incorrect result fields are ignored. Answers come from the supplied explanations and are mapped to PRINCE2 topics.</p>
+      <p>The supplied Correct/Incorrect result fields are ignored. Answers come from the supplied explanations and are mapped to concise PRINCE2 topics.</p>
       <p id="libraryCount" class="library-count">Loading question bank…</p>
     </div>
 
@@ -107,7 +107,7 @@
         <div class="notes-heading">
           <div>
             <p class="eyebrow">Study notebook</p>
-            <h2 id="notesTitle">Markdown notes</h2>
+            <h2 id="notesTitle">Question notes</h2>
           </div>
           <span id="noteSaveStatus" class="save-status" aria-live="polite">Saved locally</span>
         </div>
@@ -120,16 +120,41 @@
         </label>
 
         <div class="note-tabs" role="tablist" aria-label="Note view">
-          <button id="noteEditTab" type="button" class="active" role="tab" aria-selected="true">Write</button>
-          <button id="notePreviewTab" type="button" role="tab" aria-selected="false">Preview</button>
+          <button id="notePreviewTab" type="button" class="active" role="tab" aria-selected="true">Preview</button>
+          <button id="noteEditTab" type="button" role="tab" aria-selected="false">Edit</button>
         </div>
 
-        <textarea id="noteEditor" class="note-editor" rows="18" spellcheck="true" placeholder="# What I need to remember&#10;&#10;- Why the correct answer is right&#10;- Why my answer was wrong&#10;- Official guide page to review"></textarea>
-        <div id="notePreview" class="note-preview hidden" aria-live="polite"></div>
+        <div id="noteToolbar" class="note-toolbar" role="toolbar" aria-label="Text formatting">
+          <label class="toolbar-select-label" for="noteBlockStyle">Style</label>
+          <select id="noteBlockStyle" class="toolbar-select" aria-label="Paragraph style">
+            <option value="paragraph">Paragraph</option>
+            <option value="h1">Large heading</option>
+            <option value="h2">Heading</option>
+            <option value="h3">Small heading</option>
+          </select>
+
+          <button type="button" class="format-button" data-command="bold" aria-label="Bold" title="Bold"><b>B</b></button>
+          <button type="button" class="format-button" data-command="italic" aria-label="Italic" title="Italic"><i>I</i></button>
+          <button type="button" class="format-button" data-command="underline" aria-label="Underline" title="Underline"><u>U</u></button>
+          <button type="button" class="format-button" data-command="bullet" aria-label="Bulleted list" title="Bulleted list">• List</button>
+          <button type="button" class="format-button" data-command="numbered" aria-label="Numbered list" title="Numbered list">1. List</button>
+          <button type="button" class="format-button" data-command="quote" aria-label="Quote" title="Quote">❝</button>
+          <button type="button" class="format-button" data-command="code" aria-label="Inline code" title="Inline code">&lt;/&gt;</button>
+          <button type="button" class="format-button" data-command="link" aria-label="Insert link" title="Insert link">Link</button>
+
+          <label class="colour-tool" title="Text colour">
+            <span>Colour</span>
+            <input id="noteTextColour" type="color" value="#245e82" aria-label="Text colour">
+          </label>
+          <button id="applyColourBtn" type="button" class="format-button" aria-label="Apply selected text colour">Apply</button>
+        </div>
+
+        <textarea id="noteEditor" class="note-editor hidden" rows="18" spellcheck="true" placeholder="Use the formatting buttons above. The note is stored as Markdown automatically."></textarea>
+        <div id="notePreview" class="note-preview" aria-live="polite"></div>
 
         <div class="note-help">
-          <span>Markdown supported: headings, bold, lists, links, quotes and code.</span>
-          <button id="downloadNotesBtn" type="button">Download .md</button>
+          <span>No Markdown knowledge required. Use the toolbar, then Preview to see the formatted result.</span>
+          <button id="downloadNotesBtn" type="button">Download notes</button>
         </div>
       </section>
     </aside>
@@ -141,20 +166,20 @@
   <p><a href="https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2/prince2-7-foundation-3579" target="_blank" rel="noopener noreferrer">Official Foundation certification page</a> · <a href="../docs/DISCLAIMER.md">Disclaimer</a></p>
 </footer>
 
-<script src="data/hard-foundation-01.js?v=20260721-3"></script>
-<script src="data/hard-foundation-02.js?v=20260721-3"></script>
-<script src="data/hard-foundation-03a.js?v=20260721-3"></script>
-<script src="data/hard-foundation-03b.js?v=20260721-3"></script>
-<script src="data/hard-foundation-03c.js?v=20260721-3"></script>
-<script src="data/hard-foundation-03d.js?v=20260721-3"></script>
-<script src="data/hard-foundation-03e.js?v=20260721-3"></script>
-<script src="data/hard-foundation-04a.js?v=20260721-3"></script>
-<script src="data/hard-foundation-04b.js?v=20260721-3"></script>
-<script src="data/hard-foundation-04c.js?v=20260721-3"></script>
-<script src="data/hard-foundation-04d.js?v=20260721-3"></script>
-<script src="data/hard-foundation-04e.js?v=20260721-3"></script>
-<script src="data/hard-foundation-04f.js?v=20260721-3"></script>
-<script src="data/hard-foundation-05.js?v=20260721-3"></script>
-<script src="foundation.js?v=20260721-3"></script>
+<script src="data/hard-foundation-01.js?v=20260721-4"></script>
+<script src="data/hard-foundation-02.js?v=20260721-4"></script>
+<script src="data/hard-foundation-03a.js?v=20260721-4"></script>
+<script src="data/hard-foundation-03b.js?v=20260721-4"></script>
+<script src="data/hard-foundation-03c.js?v=20260721-4"></script>
+<script src="data/hard-foundation-03d.js?v=20260721-4"></script>
+<script src="data/hard-foundation-03e.js?v=20260721-4"></script>
+<script src="data/hard-foundation-04a.js?v=20260721-4"></script>
+<script src="data/hard-foundation-04b.js?v=20260721-4"></script>
+<script src="data/hard-foundation-04c.js?v=20260721-4"></script>
+<script src="data/hard-foundation-04d.js?v=20260721-4"></script>
+<script src="data/hard-foundation-04e.js?v=20260721-4"></script>
+<script src="data/hard-foundation-04f.js?v=20260721-4"></script>
+<script src="data/hard-foundation-05.js?v=20260721-4"></script>
+<script src="foundation.js?v=20260721-4"></script>
 </body>
 </html>
