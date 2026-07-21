@@ -4,80 +4,94 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17324d">
-  <meta name="description" content="A hard PRINCE2 Project Management Foundation Version 7 question library with answer reveal, explanations and topic filters.">
-  <title>PRINCE2 Foundation — Hard Question Library</title>
-  <link rel="stylesheet" href="../assets/styles.css?v=20260721-2">
-  <link rel="stylesheet" href="foundation.css?v=20260721-2">
+  <meta name="description" content="PRINCE2 Project Management Foundation Version 7 hard question library with answer reveal, concise topic filters and Markdown study notes.">
+  <title>PRINCE2 Foundation Study Library</title>
+  <link rel="stylesheet" href="../assets/styles.css?v=20260721-3">
+  <link rel="stylesheet" href="foundation.css?v=20260721-3">
 </head>
 <body>
 <a class="skip-link" href="#questionCard">Skip to current question</a>
 
-<header class="site-header">
+<header class="site-header foundation-header">
   <div class="brand">
-    <h1>PRINCE2® Foundation Library</h1>
-    <p>Hard question bank · Four supplied practice sets · Study and answer reveal</p>
+    <p class="header-kicker">PRINCE2® 7</p>
+    <h1>Foundation Study Library</h1>
+    <p>Hard practice questions · concise topics · Markdown notes</p>
   </div>
   <nav class="toolbar" aria-label="Site navigation">
-    <a class="header-link" href="../index.html">Practitioner exams</a>
+    <a class="header-link" href="../index.html">Practitioner</a>
     <a class="header-link" href="../references.html">References</a>
   </nav>
 </header>
 
 <main class="foundation-shell">
-  <section class="card topic-intro">
-    <div>
-      <p class="eyebrow">Hard Foundation question bank</p>
-      <h2>Complete Foundation library</h2>
-      <p><strong id="libraryCount">Loading question bank…</strong></p>
-      <p>The four supplied exports are treated as hard Foundation practice material. Their Correct/Incorrect result fields are ignored because those results came from dummy selections used to expose the explanations.</p>
+  <section class="study-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">Study dashboard</p>
+      <h2>Work through the bank without losing your notes</h2>
+      <p>The supplied Correct/Incorrect result fields are ignored. Answers come from the supplied explanations and are mapped to PRINCE2 topics.</p>
+      <p id="libraryCount" class="library-count">Loading question bank…</p>
     </div>
-    <div class="topic-actions">
-      <button id="shuffleBtn" type="button">Shuffle current set</button>
-      <button id="resetBtn" type="button">Reset progress</button>
+
+    <div class="stat-grid" aria-label="Current progress">
+      <div class="stat-card"><strong id="answeredStat">0</strong><span>Answered</span></div>
+      <div class="stat-card"><strong id="revealedStat">0</strong><span>Revealed</span></div>
+      <div class="stat-card"><strong id="correctStat">0</strong><span>Correct</span></div>
+      <div class="stat-card"><strong id="notesStat">0</strong><span>Notes</span></div>
     </div>
   </section>
 
-  <section class="card filter-card" aria-labelledby="filterTitle">
-    <h2 id="filterTitle">Choose a study set</h2>
+  <section class="card control-card" aria-labelledby="filterTitle">
+    <div class="control-heading">
+      <div>
+        <p class="eyebrow">Question selection</p>
+        <h2 id="filterTitle">Choose what to study</h2>
+      </div>
+      <div class="control-actions">
+        <button id="nextUnansweredBtn" type="button">Next unanswered</button>
+        <button id="shuffleBtn" type="button">Shuffle</button>
+        <button id="resetBtn" type="button" class="subtle-danger">Reset</button>
+      </div>
+    </div>
+
     <div class="filter-grid">
       <label>Practice set
         <select id="batchSelect">
-          <option value="all">All four sets</option>
+          <option value="all">All practice sets</option>
         </select>
       </label>
-      <label>Topic
+      <label>Study topic
         <select id="topicSelect">
-          <option value="all">All topics</option>
-        </select>
-      </label>
-      <label>Source difficulty label
-        <select id="difficultySelect">
-          <option value="all">All source labels</option>
+          <option value="all">All concise topics</option>
         </select>
       </label>
     </div>
     <p id="filterSummary" class="notice" aria-live="polite"></p>
   </section>
 
-  <div class="foundation-layout">
-    <aside>
+  <div class="study-layout">
+    <aside class="navigator-column">
       <details class="nav-panel" open>
         <summary>Question navigator</summary>
         <div class="nav-content">
-          <strong id="topicTitle">Hard Foundation library</strong>
+          <strong id="topicTitle">Foundation library</strong>
           <div class="progressbar" aria-hidden="true"><span id="progressFill"></span></div>
           <div id="progressText" class="notice" aria-live="polite"></div>
           <div id="navigator" class="navigator" aria-label="Questions"></div>
-          <p class="notice">Choose an answer, then reveal the answer and supplied explanation. References are topic-level until each question receives detailed page verification.</p>
+          <div class="navigator-legend">
+            <span><i class="legend-dot current-dot"></i>Current</span>
+            <span><i class="legend-dot answered-dot"></i>Answered</span>
+            <span><i class="legend-dot revealed-dot"></i>Revealed</span>
+          </div>
         </div>
       </details>
     </aside>
 
-    <section>
+    <section class="question-column">
       <article id="questionCard" class="card question" tabindex="-1"></article>
       <article id="answerCard" class="card answerbox hidden" aria-live="polite"></article>
 
-      <section class="card actions" aria-label="Question controls">
+      <section class="card actions question-actions" aria-label="Question controls">
         <div class="action-group">
           <button id="prevBtn" type="button">Previous</button>
           <button id="nextBtn" type="button">Next</button>
@@ -87,6 +101,38 @@
         </div>
       </section>
     </section>
+
+    <aside class="notes-column">
+      <section class="card notes-card" aria-labelledby="notesTitle">
+        <div class="notes-heading">
+          <div>
+            <p class="eyebrow">Study notebook</p>
+            <h2 id="notesTitle">Markdown notes</h2>
+          </div>
+          <span id="noteSaveStatus" class="save-status" aria-live="polite">Saved locally</span>
+        </div>
+
+        <label class="note-scope-label">Note for
+          <select id="noteScope">
+            <option value="question">Current question</option>
+            <option value="general">General notebook</option>
+          </select>
+        </label>
+
+        <div class="note-tabs" role="tablist" aria-label="Note view">
+          <button id="noteEditTab" type="button" class="active" role="tab" aria-selected="true">Write</button>
+          <button id="notePreviewTab" type="button" role="tab" aria-selected="false">Preview</button>
+        </div>
+
+        <textarea id="noteEditor" class="note-editor" rows="18" spellcheck="true" placeholder="# What I need to remember&#10;&#10;- Why the correct answer is right&#10;- Why my answer was wrong&#10;- Official guide page to review"></textarea>
+        <div id="notePreview" class="note-preview hidden" aria-live="polite"></div>
+
+        <div class="note-help">
+          <span>Markdown supported: headings, bold, lists, links, quotes and code.</span>
+          <button id="downloadNotesBtn" type="button">Download .md</button>
+        </div>
+      </section>
+    </aside>
   </div>
 </main>
 
@@ -95,19 +141,20 @@
   <p><a href="https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2/prince2-7-foundation-3579" target="_blank" rel="noopener noreferrer">Official Foundation certification page</a> · <a href="../docs/DISCLAIMER.md">Disclaimer</a></p>
 </footer>
 
-<script src="data/hard-foundation-01.js?v=20260721-2"></script>
-<script src="data/hard-foundation-02.js?v=20260721-2"></script>
-<script src="data/hard-foundation-03a.js?v=20260721-2"></script>
-<script src="data/hard-foundation-03b.js?v=20260721-2"></script>
-<script src="data/hard-foundation-03c.js?v=20260721-2"></script>
-<script src="data/hard-foundation-03d.js?v=20260721-2"></script>
-<script src="data/hard-foundation-03e.js?v=20260721-2"></script>
-<script src="data/hard-foundation-04a.js?v=20260721-2"></script>
-<script src="data/hard-foundation-04b.js?v=20260721-2"></script>
-<script src="data/hard-foundation-04c.js?v=20260721-2"></script>
-<script src="data/hard-foundation-04d.js?v=20260721-2"></script>
-<script src="data/hard-foundation-04e.js?v=20260721-2"></script>
-<script src="data/hard-foundation-04f.js?v=20260721-2"></script>
-<script src="foundation.js?v=20260721-2"></script>
+<script src="data/hard-foundation-01.js?v=20260721-3"></script>
+<script src="data/hard-foundation-02.js?v=20260721-3"></script>
+<script src="data/hard-foundation-03a.js?v=20260721-3"></script>
+<script src="data/hard-foundation-03b.js?v=20260721-3"></script>
+<script src="data/hard-foundation-03c.js?v=20260721-3"></script>
+<script src="data/hard-foundation-03d.js?v=20260721-3"></script>
+<script src="data/hard-foundation-03e.js?v=20260721-3"></script>
+<script src="data/hard-foundation-04a.js?v=20260721-3"></script>
+<script src="data/hard-foundation-04b.js?v=20260721-3"></script>
+<script src="data/hard-foundation-04c.js?v=20260721-3"></script>
+<script src="data/hard-foundation-04d.js?v=20260721-3"></script>
+<script src="data/hard-foundation-04e.js?v=20260721-3"></script>
+<script src="data/hard-foundation-04f.js?v=20260721-3"></script>
+<script src="data/hard-foundation-05.js?v=20260721-3"></script>
+<script src="foundation.js?v=20260721-3"></script>
 </body>
 </html>
