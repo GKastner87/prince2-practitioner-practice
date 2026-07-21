@@ -58,6 +58,7 @@ jobs:
           test -f references.html
           test -f foundation/index.html
           test -f foundation/foundation.css
+          test -f foundation/note-toolbar.css
           test -f foundation/foundation.js
           test -f foundation/data/hard-foundation-01.js
           test -f foundation/data/hard-foundation-02.js
@@ -74,6 +75,7 @@ jobs:
           test -f foundation/data/hard-foundation-04f.js
           test -f foundation/data/hard-foundation-05.js
           test -f assets/enhancements.css
+          grep -q 'note-toolbar.css' foundation/index.html
           grep -q 'assets/enhancements.js' index.html
           grep -q 'history.html' index.html
           grep -q 'foundation/index.html' index.html
