@@ -4,101 +4,143 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#17324d">
-  <meta name="description" content="Two original PRINCE2 7 Practitioner-style practice exams with study mode, detailed rationales, attempt history and timed exam mode.">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <title>PRINCE2 7 Practitioner Interactive Practice</title>
-  <link rel="stylesheet" href="assets/styles.css?v=20260720-3">
-  <link rel="stylesheet" href="assets/enhancements.css?v=20260720-3">
+  <meta name="description" content="Choose PRINCE2 Project Management Foundation or Practitioner Version 7 study and practice resources.">
+  <title>PRINCE2 Study and Practice Library</title>
+  <script src="assets/theme.js"></script>
+  <link rel="stylesheet" href="assets/styles.css?v=20260721-5">
+  <link rel="stylesheet" href="assets/theme.css?v=20260721-5">
+  <link rel="stylesheet" href="assets/home.css?v=20260721-5">
 </head>
-<body>
-<a class="skip-link" href="#questionCard">Skip to current question</a>
-<header class="site-header">
+<body class="home-body">
+<a class="skip-link" href="#studyPaths">Skip to study choices</a>
+
+<header class="site-header home-header">
   <div class="brand">
-    <h1>PRINCE2® 7 Practitioner Practice</h1>
-    <p>Original practice material · Detailed learning mode · Attempt history</p>
+    <h1>PRINCE2® Study and Practice Library</h1>
+    <p>Foundation and Practitioner · Version 7 · Independent learning material</p>
   </div>
-  <div class="toolbar" aria-label="Exam controls">
-    <label>Exam
-      <select id="examSelect">
-        <option value="A">A — CareLink</option>
-        <option value="B">B — RiverCity</option>
-      </select>
-    </label>
-    <label>Mode
-      <select id="modeSelect">
-        <option value="study">Study / reveal answer</option>
-        <option value="timed">Timed exam</option>
-      </select>
-    </label>
-    <output id="timer" class="timer" aria-live="polite">Study</output>
-    <a class="header-link" href="foundation/index.html">Foundation</a>
-    <a class="header-link" href="history.html">History</a>
+  <nav class="toolbar" aria-label="Site navigation">
     <a class="header-link" href="references.html">References</a>
-    <button id="resetBtn" type="button">Reset</button>
-  </div>
+    <a class="header-link" href="history.html">Practitioner history</a>
+    <a class="header-link" href="https://github.com/GKastner87/prince2-practitioner-practice">GitHub</a>
+    <button type="button" class="theme-toggle" data-theme-toggle></button>
+  </nav>
 </header>
 
-<div id="loading" class="loading" role="status" aria-live="polite">Loading 112 questions and answer references…</div>
+<main class="home-main">
+  <section class="home-hero">
+    <div class="home-hero-copy">
+      <p class="home-kicker">Choose the right level</p>
+      <h2>Learn the method, then practise applying it.</h2>
+      <p>Foundation develops fast recognition of PRINCE2 terminology, roles, practices and processes. Practitioner focuses on applying and tailoring the method to a project scenario.</p>
+    </div>
 
-<div id="app" class="layout hidden">
-  <aside>
-    <details id="navPanel" class="nav-panel" open>
-      <summary>Question navigator</summary>
-      <div class="nav-content">
-        <strong id="examTitle"></strong>
-        <div class="progressbar" aria-hidden="true"><span id="progressFill"></span></div>
-        <div id="progressText" class="notice" aria-live="polite"></div>
-        <div id="navigator" class="navigator" aria-label="Questions"></div>
-        <p class="notice mode-help"><b>Study mode:</b> answer, reveal the explanation, then save a study checkpoint when useful.<br><br><b>Timed mode:</b> answers remain hidden until submission. Submitted attempts are added to History automatically.</p>
+    <div class="home-hero-summary" aria-label="Library summary">
+      <div class="summary-row">
+        <span class="summary-icon" aria-hidden="true">F</span>
+        <div><strong>160+ Foundation questions</strong><span>Hard practice bank, concise filters and study notes</span></div>
       </div>
-    </details>
-  </aside>
-
-  <main>
-    <section id="scenarioCard" class="card scenario"></section>
-    <section id="questionCard" class="card question" tabindex="-1"></section>
-    <section id="answerCard" class="card answerbox hidden" aria-live="polite"></section>
-
-    <section class="card actions" aria-label="Question navigation controls">
-      <div class="action-group">
-        <button id="prevBtn" type="button">Previous</button>
-        <button id="nextBtn" type="button">Next</button>
+      <div class="summary-row">
+        <span class="summary-icon" aria-hidden="true">P</span>
+        <div><strong>Two Practitioner exams</strong><span>112 questions with scenarios and detailed rationales</span></div>
       </div>
-      <div class="action-group">
-        <button id="saveStudyBtn" type="button">Save study session</button>
-        <button id="checkBtn" class="primary" type="button">Check and reveal answer</button>
-        <button id="submitBtn" class="danger hidden" type="button">Submit exam</button>
+      <div class="summary-row">
+        <span class="summary-icon" aria-hidden="true">A</span>
+        <div><strong>Responsive and accessible</strong><span>Desktop, iPad and mobile with light and dark modes</span></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section id="resultsCard" class="card results hidden" aria-live="polite"></section>
-  </main>
-</div>
+  <section id="studyPaths" aria-labelledby="studyPathsTitle">
+    <div class="path-heading">
+      <div>
+        <p class="home-kicker">Study paths</p>
+        <h2 id="studyPathsTitle">What are you preparing for?</h2>
+      </div>
+      <p>Progress, notes and attempt history remain stored in this browser unless exported.</p>
+    </div>
 
-<footer>
-  <p>Independent original practice material. Not affiliated with or endorsed by PeopleCert. PRINCE2® is a registered trademark of PeopleCert.</p>
-  <p><a href="foundation/index.html">Foundation library</a> · <a href="history.html">Attempt history</a> · <a href="references.html">Reference library</a> · <a href="https://github.com/GKastner87/prince2-practitioner-practice">GitHub repository</a> · <a href="docs/DISCLAIMER.md">Disclaimer</a></p>
+    <div class="path-grid">
+      <a class="path-card foundation-card" href="foundation/index.html">
+        <div class="path-card-top">
+          <span class="path-level">Foundation</span>
+          <h3>Build precise recall and understanding</h3>
+          <p>Use the hard question bank to learn definitions, purposes, role boundaries, management products and the lifecycle flow. Filter by concise topic and keep formatted notes beside each question.</p>
+        </div>
+        <div>
+          <div class="path-facts">
+            <div class="path-fact"><strong>60 questions</strong><span>Official exam format</span></div>
+            <div class="path-fact"><strong>60 minutes</strong><span>Closed book</span></div>
+            <div class="path-fact"><strong>60% pass</strong><span>36 correct</span></div>
+          </div>
+          <span class="path-cta">Open Foundation library <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+
+      <a class="path-card practitioner-card" href="practitioner/index.html">
+        <div class="path-card-top">
+          <span class="path-level">Practitioner</span>
+          <h3>Apply PRINCE2 to project scenarios</h3>
+          <p>Complete two original scenario-based exams in study or timed mode. Reveal detailed decision paths, option analysis, guide references and improvement history.</p>
+        </div>
+        <div>
+          <div class="path-facts">
+            <div class="path-fact"><strong>70 marks</strong><span>56 questions and sub-questions</span></div>
+            <div class="path-fact"><strong>150 minutes</strong><span>Objective testing</span></div>
+            <div class="path-fact"><strong>Open book</strong><span>60% pass</span></div>
+          </div>
+          <span class="path-cta">Open Practitioner exams <span aria-hidden="true">→</span></span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section class="priority-section" aria-labelledby="priorityTitle">
+    <div class="priority-intro">
+      <div>
+        <p class="home-kicker">Foundation question-bank priorities</p>
+        <h2 id="priorityTitle">Where the strongest coverage should sit</h2>
+      </div>
+      <p>The Foundation syllabus is not evenly weighted. The library should deliberately contain far more high-quality practice questions for practices, followed by processes and people.</p>
+    </div>
+
+    <div class="weight-grid">
+      <article class="weight-card primary-weight">
+        <span class="weight-number">60%</span>
+        <strong>Practices</strong>
+        <p>Highest priority: business case, organizing, plans, quality, risk, issues and progress. Build strong coverage of purposes, management products, roles, techniques and interactions.</p>
+      </article>
+      <article class="weight-card">
+        <span class="weight-number">15%</span>
+        <strong>Processes</strong>
+        <p>Purpose, objectives, activities, decision points, responsibilities and the flow from starting up through closure.</p>
+      </article>
+      <article class="weight-card">
+        <span class="weight-number">14%</span>
+        <strong>People</strong>
+        <p>Roles, leadership, teams, stakeholders, communication and organizational change.</p>
+      </article>
+      <article class="weight-card">
+        <span class="weight-number">8%</span>
+        <strong>Principles</strong>
+        <p>Recognition, purpose, consequences of not applying them and tailoring without breaking the method.</p>
+      </article>
+      <article class="weight-card">
+        <span class="weight-number">3%</span>
+        <strong>Core concepts</strong>
+        <p>Projects, outputs, outcomes, benefits, performance targets, delivery approaches and project context.</p>
+      </article>
+    </div>
+
+    <div class="priority-callout">
+      <strong>Next content priority:</strong> deepen the seven practices evenly, especially Quality, Issues and Progress, then add balanced process questions that test who does what, when, and using which management product.
+    </div>
+  </section>
+</main>
+
+<footer class="home-footer">
+  <p>Independent study material. Not affiliated with or endorsed by PeopleCert. PRINCE2® is a registered trademark of PeopleCert.</p>
+  <p><a href="https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2/PRINCE2-7-foundation-3579" target="_blank" rel="noopener noreferrer">Official Foundation information</a> · <a href="https://www.peoplecert.org/browse-certifications/project-programme-and-portfolio-management/PRINCE2-2/PRINCE2-7-practitioner-3581" target="_blank" rel="noopener noreferrer">Official Practitioner information</a> · <a href="references.html">Reference library</a> · <a href="docs/DISCLAIMER.md">Disclaimer</a></p>
 </footer>
-
-<script src="config/reference-config.js?v=20260720-3"></script>
-<script src="data/chunks/a-01.js?v=20260720-3"></script>
-<script src="data/chunks/a-02.js?v=20260720-3"></script>
-<script src="data/chunks/a-03.js?v=20260720-3"></script>
-<script src="data/chunks/a-04.js?v=20260720-3"></script>
-<script src="data/chunks/a-05.js?v=20260720-3"></script>
-<script src="data/chunks/a-06.js?v=20260720-3"></script>
-<script src="data/chunks/b-01.js?v=20260720-3"></script>
-<script src="data/chunks/b-02.js?v=20260720-3"></script>
-<script src="data/chunks/b-03.js?v=20260720-3"></script>
-<script src="data/chunks/b-04.js?v=20260720-3"></script>
-<script src="data/chunks/b-05.js?v=20260720-3"></script>
-<script src="data/chunks/b-06.js?v=20260720-3"></script>
-<script src="data/exam-a.js?v=20260720-3"></script>
-<script src="data/exam-b.js?v=20260720-3"></script>
-<script src="assets/app.js?v=20260720-3"></script>
-<script src="assets/reference-links.js?v=20260720-3"></script>
-<script src="assets/enhancements.js?v=20260720-3"></script>
-<script src="assets/enhancements-ready.js?v=20260720-3"></script>
 </body>
 </html>
