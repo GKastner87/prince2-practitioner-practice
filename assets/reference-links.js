@@ -38,8 +38,17 @@
     return text.replace(pages.matchedText, replacement);
   }
 
+  function resolvedGuideBaseUrl() {
+    const configured = String(config.guideUrl || '').split('#')[0].trim();
+    if (!configured) return '';
+    if (/^(?:https?:|file:|blob:)/i.test(configured)) return configured;
+
+    const siteRoot = new URL('../', window.location.href);
+    return new URL(configured.replace(/^\.\//, '').replace(/^\//, ''), siteRoot).href;
+  }
+
   function buildGuideUrl(page) {
-    const baseUrl = String(config.guideUrl || '').split('#')[0];
+    const baseUrl = resolvedGuideBaseUrl();
     const adjustedPage = page + Number(config.pageOffset || 0);
     return `${baseUrl}#page=${adjustedPage}`;
   }
