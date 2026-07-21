@@ -22,6 +22,7 @@ jobs:
 
       - name: Validate JavaScript syntax
         run: |
+          node --check assets/theme.js
           node --check assets/app.js
           node --check assets/reference-links.js
           node --check assets/enhancements.js
@@ -54,8 +55,12 @@ jobs:
       - name: Confirm required pages and assets
         run: |
           test -f index.html
+          test -f practitioner/index.html
           test -f history.html
           test -f references.html
+          test -f assets/theme.js
+          test -f assets/theme.css
+          test -f assets/home.css
           test -f foundation/index.html
           test -f foundation/foundation.css
           test -f foundation/note-toolbar.css
@@ -75,8 +80,12 @@ jobs:
           test -f foundation/data/hard-foundation-04f.js
           test -f foundation/data/hard-foundation-05.js
           test -f assets/enhancements.css
-          grep -q 'note-toolbar.css' foundation/index.html
-          grep -q 'assets/enhancements.js' index.html
-          grep -q 'history.html' index.html
+          grep -q 'practitioner/index.html' index.html
           grep -q 'foundation/index.html' index.html
+          grep -q 'assets/home.css' index.html
+          grep -q 'assets/theme.css' index.html
+          grep -q '../assets/enhancements.js' practitioner/index.html
+          grep -q '../assets/theme.css' practitioner/index.html
+          grep -q '../assets/theme.css' foundation/index.html
+          grep -q 'note-toolbar.css' foundation/index.html
           grep -q 'history-corrections.js' history.html
