@@ -52,6 +52,12 @@
     ? [...window.PRINCE2_FOUNDATION_BATCHES]
     : [];
 
+  function escapeHtml(value) {
+    return String(value).replace(/[&<>"']/g, (character) => ({
+      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+    })[character]);
+  }
+
   try {
     for (const payload of window.PRINCE2_FOUNDATION_GZIP || []) {
       batches.push(await decodeGzipBase64(payload));
@@ -108,14 +114,8 @@
     noteScope: 'question'
   };
 
-  let noteMode = 'edit';
+  let noteMode = 'preview';
   let activeNoteKey = '';
-
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, (character) => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-    })[character]);
-  }
 
   function renderInlineMarkdown(value) {
     let output = escapeHtml(value);
@@ -124,6 +124,8 @@
     output = output.replace(/__([^_]+)__/g, '<strong>$1</strong>');
     output = output.replace(/(^|[^\*])\*([^*\n]+)\*/g, '$1<em>$2</em>');
     output = output.replace(/\[([^\]]+)\]\((https?:\/\/[^)\s]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>');
+    output = output.replace(/&lt;u&gt;([\s\S]*?)&lt;\/u&gt;/g, '<u>$1</u>');
+    output = output.replace(/&lt;span style=&quot;color:(#[0-9a-fA-F]{6})&quot;&gt;([\s\S]*?)&lt;\/span&gt;/g, '<span style="color:$1">$2</span>');
     return output;
   }
 
@@ -198,7 +200,7 @@
 
     flushParagraph();
     closeList();
-    return output.join('') || '<p class="empty-preview">Nothing written yet.</p>';
+    return output.join('') || '<p class="empty-preview">No notes yet. Select Edit and use the formatting toolbar to start writing.</p>';
   }
 
   function load() {
@@ -219,9 +221,7 @@
 
   function save(statusText = 'Saved locally') {
     localStorage.setItem(storageKey, JSON.stringify(state));
-    if ($('noteSaveStatus')) {
-      $('noteSaveStatus').textContent = statusText;
-    }
+    if ($('noteSaveStatus')) $('noteSaveStatus').textContent = statusText;
   }
 
   function filteredQuestions() {
@@ -443,6 +443,7 @@
     const preview = mode === 'preview';
     $('noteEditor').classList.toggle('hidden', preview);
     $('notePreview').classList.toggle('hidden', !preview);
+    $('noteToolbar').classList.toggle('toolbar-preview-mode', preview);
     $('noteEditTab').classList.toggle('active', !preview);
     $('notePreviewTab').classList.toggle('active', preview);
     $('noteEditTab').setAttribute('aria-selected', String(!preview));
@@ -460,7 +461,78 @@
     $('noteSaveStatus').textContent = 'Saving…';
     save('Saved locally');
     $('notesStat').textContent = Object.values(state.notes).filter((value) => String(value).trim()).length;
-    if (noteMode === 'preview') $('notePreview').innerHTML = renderMarkdown(state.notes[key]);
+    $('notePreview').innerHTML = renderMarkdown(state.notes[key]);
+  }
+
+  function replaceSelection(prefix, suffix, placeholder) {
+    setNoteMode('edit');
+    const editor = $('noteEditor');
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    const selected = editor.value.slice(start, end) || placeholder;
+    const replacement = `${prefix}${selected}${suffix}`;
+    editor.setRangeText(replacement, start, end, 'select');
+    const selectedStart = start + prefix.length;
+    editor.setSelectionRange(selectedStart, selectedStart + selected.length);
+    updateNote();
+    editor.focus();
+  }
+
+  function transformSelectedLines(transformer) {
+    setNoteMode('edit');
+    const editor = $('noteEditor');
+    const value = editor.value;
+    const start = editor.selectionStart;
+    const end = editor.selectionEnd;
+    const lineStart = value.lastIndexOf('\n', Math.max(0, start - 1)) + 1;
+    const nextBreak = value.indexOf('\n', end);
+    const lineEnd = nextBreak === -1 ? value.length : nextBreak;
+    const block = value.slice(lineStart, lineEnd) || 'New note';
+    const transformed = transformer(block.split('\n')).join('\n');
+    editor.setRangeText(transformed, lineStart, lineEnd, 'select');
+    editor.setSelectionRange(lineStart, lineStart + transformed.length);
+    updateNote();
+    editor.focus();
+  }
+
+  function applyBlockStyle(style) {
+    const prefixes = { paragraph: '', h1: '# ', h2: '## ', h3: '### ' };
+    transformSelectedLines((lines) => lines.map((line) => {
+      const clean = line.replace(/^#{1,4}\s+/, '');
+      return `${prefixes[style] ?? ''}${clean}`;
+    }));
+  }
+
+  function applyList(type) {
+    transformSelectedLines((lines) => lines.map((line, index) => {
+      const clean = line.replace(/^\s*(?:[-*+]\s+|\d+\.\s+|>\s+)/, '');
+      if (type === 'bullet') return `- ${clean}`;
+      if (type === 'numbered') return `${index + 1}. ${clean}`;
+      return `> ${clean}`;
+    }));
+  }
+
+  function applyFormatting(command) {
+    if (command === 'bold') replaceSelection('**', '**', 'bold text');
+    if (command === 'italic') replaceSelection('*', '*', 'italic text');
+    if (command === 'underline') replaceSelection('<u>', '</u>', 'underlined text');
+    if (command === 'code') replaceSelection('`', '`', 'term');
+    if (command === 'bullet') applyList('bullet');
+    if (command === 'numbered') applyList('numbered');
+    if (command === 'quote') applyList('quote');
+    if (command === 'link') {
+      setNoteMode('edit');
+      const editor = $('noteEditor');
+      const selected = editor.value.slice(editor.selectionStart, editor.selectionEnd);
+      const url = window.prompt('Paste the web address for this link:', 'https://');
+      if (!url || !/^https?:\/\//i.test(url)) return;
+      replaceSelection('[', `](${url})`, selected || 'link text');
+    }
+  }
+
+  function applyTextColour() {
+    const colour = $('noteTextColour').value || '#245e82';
+    replaceSelection(`<span style="color:${colour}">`, '</span>', 'coloured text');
   }
 
   function downloadNotes() {
@@ -563,8 +635,8 @@
     $('batchSelect').value = 'all';
     $('topicSelect').value = 'all';
     activeNoteKey = '';
-    setNoteMode('edit');
     render();
+    setNoteMode('preview');
   }
 
   function render() {
@@ -598,11 +670,22 @@
     activeNoteKey = '';
     save();
     syncNoteEditor(true);
+    setNoteMode('preview');
   });
   $('noteEditor').addEventListener('input', updateNote);
   $('noteEditTab').addEventListener('click', () => setNoteMode('edit'));
   $('notePreviewTab').addEventListener('click', () => setNoteMode('preview'));
   $('downloadNotesBtn').addEventListener('click', downloadNotes);
+  $('noteBlockStyle').addEventListener('change', () => {
+    applyBlockStyle($('noteBlockStyle').value);
+    $('noteBlockStyle').value = 'paragraph';
+  });
+  $('applyColourBtn').addEventListener('click', applyTextColour);
+  $('noteToolbar').querySelectorAll('[data-command]').forEach((button) => {
+    button.addEventListener('mousedown', (event) => event.preventDefault());
+    button.addEventListener('click', () => applyFormatting(button.dataset.command));
+  });
 
   render();
+  setNoteMode('preview');
 })();
