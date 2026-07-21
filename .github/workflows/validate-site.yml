@@ -42,6 +42,7 @@ jobs:
           node --check foundation/data/hard-foundation-04d.js
           node --check foundation/data/hard-foundation-04e.js
           node --check foundation/data/hard-foundation-04f.js
+          node --check foundation/data/hard-foundation-05.js
           node --check foundation/foundation.js
 
       - name: Validate Practitioner questions and references
@@ -71,6 +72,7 @@ jobs:
           test -f foundation/data/hard-foundation-04d.js
           test -f foundation/data/hard-foundation-04e.js
           test -f foundation/data/hard-foundation-04f.js
+          test -f foundation/data/hard-foundation-05.js
           test -f assets/enhancements.css
           grep -q 'assets/enhancements.js' index.html
           grep -q 'history.html' index.html
